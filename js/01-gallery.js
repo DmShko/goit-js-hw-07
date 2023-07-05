@@ -6,15 +6,14 @@ const galleryElement = document.querySelector("ul.gallery");
 
 // event handler
 galleryElement.addEventListener('click', e => {
-   
-    if(!e.target.nodeName === "A") return;
+    
+    if(!e.target.nodeName === "IMG") return;
     e.preventDefault();
     const instance = basicLightbox.create(`
-    img ${e.target.children[0].innerHTML}`
-)
-    console.log(instance);
+    <img ${e.target.innerHTML}
+    >`);
+    instance.show();
 
-}, { once: true });
-
+});
 
 console.log(galleryItems);
