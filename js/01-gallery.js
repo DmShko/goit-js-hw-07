@@ -26,16 +26,31 @@ const getAttribute = addMarkup();
 
 // add content to 'gallery'
 galleryElement.innerHTML = getAttribute;
+
 // event handler
 galleryElement.addEventListener('click', e => {
     
     if(!e.target.nodeName === "IMG") return;
     e.preventDefault();
+    
     const instance = basicLightbox.create(`
     <img src = "${e.target.getAttribute("data-source")}"
     width = "1280" height = "855">`);
     instance.show();
+ 
+    // lightbox is visible only
+    document.addEventListener('keyup', e => {
+        if(!basicLightbox.visible()) {
+            removeEventListener('keyup', e);
+            return;
+        }
 
+        if(e.code === "Escape") {
+            instance.close();
+        } 
+    });
+    
 });
-
+    
+// output basic object
 console.log(galleryItems);
