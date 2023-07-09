@@ -38,7 +38,7 @@ galleryElement.addEventListener('click', e => {
     width = "1280" height = "855">`);
     instance.show();
  
-    // lightbox is visible only
+    // 'escape' if lightbox is visible only
     document.addEventListener('keyup', e => {
         if(!basicLightbox.visible()) {
             removeEventListener('keyup', e);
