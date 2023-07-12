@@ -13,8 +13,7 @@ function addMarkup() {
             <img 
                 class="gallery__image"
                 src="${element.preview}"  
-                alt = ""
-                title="${element.description}" 
+                alt = "${element.description}"
             > 
         </a>
       </li>`
@@ -29,16 +28,18 @@ galleryElement.innerHTML = getAttribute;
 
 // event handler
 galleryElement.addEventListener('click', e => {
-    e.preventDefault();
+    
     let gallery = new SimpleLightbox('.gallery a',
     {captions: true,
      captionSelector: 'img',   
      captionType: 'attr',
+     captionsData: 'alt',
      captionPosition: 'bottom',
      captionDelay: 250,
-     showCounter: false,});
+    });
     
     gallery.open(); 
-});
+
+}, { once: true });
 
 console.log(galleryItems);

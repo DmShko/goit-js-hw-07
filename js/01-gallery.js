@@ -31,26 +31,27 @@ galleryElement.innerHTML = getAttribute;
 galleryElement.addEventListener('click', e => {
     
     if(!e.target.nodeName === "IMG") return;
+    
     e.preventDefault();
     
-    const instance = basicLightbox.create(`
+    const gallery = basicLightbox.create(`
     <img src = "${e.target.getAttribute("data-source")}"
-    width = "1280" height = "855">`);
-    instance.show();
- 
-    // 'escape' if lightbox is visible only
-    document.addEventListener('keyup', e => {
-        if(!basicLightbox.visible()) {
-            removeEventListener('keyup', e);
-            return;
-        }
+    width = "1280" height = "855">`, {onShow: () => 
+        // 'escape' if lightbox is visible only
+            window.addEventListener('keyup', addEvent),
+        onClose: () => 
+            window.removeEventListener('keyup', addEvent),
+    });
+
+    gallery.show();
+
+    function addEvent(e) {
 
         if(e.code === "Escape") {
-            instance.close();
-        } 
-    });
-    
+            gallery.close(); 
+        }
+    }
 });
-    
+
 // output basic object
 console.log(galleryItems);
