@@ -1,13 +1,15 @@
-import { galleryItems } from './gallery-items.js';
+import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
 // add event to father element
 const galleryElement = document.querySelector("ul.gallery");
 
 function addMarkup() {
-// get atribut from 'galleryItems'
-    return galleryItems.map(element => 
-      `
+  // get atribut from 'galleryItems'
+  return galleryItems
+    .map(
+      (element) =>
+        `
      <li class="gallery__item">
         <a class="gallery__link" href="${element.original}">
             <img 
@@ -17,29 +19,17 @@ function addMarkup() {
             > 
         </a>
       </li>`
-    ).join("");
+    )
+    .join("");
 }
 
-// call create murkup function
-const getAttribute = addMarkup();
-
 // add content to 'gallery'
-galleryElement.innerHTML = getAttribute;
+galleryElement.insertAdjacentHTML('beforeend', addMarkup());
 
-// event handler
-galleryElement.addEventListener('click', e => {
-    
-    let gallery = new SimpleLightbox('.gallery a',
-    {captions: true,
-     captionSelector: 'img',   
-     captionType: 'attr',
-     captionsData: 'alt',
-     captionPosition: 'bottom',
-     captionDelay: 250,
-    });
-    
-    gallery.open(); 
-
-}, { once: true });
+// create lightbox
+const gallery = new SimpleLightbox(".gallery a", {   
+  captionsData: "alt",
+  captionDelay: 250,
+});
 
 console.log(galleryItems);
