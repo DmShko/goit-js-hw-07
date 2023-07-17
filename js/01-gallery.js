@@ -38,9 +38,9 @@ galleryElement.addEventListener('click', e => {
     <img src = "${e.target.getAttribute("data-source")}"
     width = "1280" height = "855">`, {onShow: () => 
         // 'escape' if lightbox is visible only
-            window.addEventListener('keyup', addEvent),
+            window.addEventListener('keydown', addEvent),
         onClose: () => 
-            window.removeEventListener('keyup', addEvent),
+            window.removeEventListener('keydown', addEvent),
     });
 
     gallery.show();
